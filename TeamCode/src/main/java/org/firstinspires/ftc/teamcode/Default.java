@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
@@ -29,7 +30,9 @@ public class Default extends LinearOpMode {
     HardwarePushbot robot           = new HardwarePushbot();   // Use a Pushbot's hardware
     // could also use HardwarePushbotMatrix class.
     double          clawOffset      = 0;                       // Servo mid position
-    final double    CLAW_SPEED      = 0.02 ;                   // sets rate to move servo
+    final double    CLAW_SPEED      = 0.02 ;
+    DcMotor leftMotor = null;
+    DcMotor rightMotor = null;
 
     @Override
     public void runOpMode() {
@@ -74,8 +77,8 @@ public class Default extends LinearOpMode {
             }
 
             // Output the safe vales to the motor drives.
-            robot.leftDrive.setPower(left);
-            robot.rightDrive.setPower(right);
+            leftMotor.setPower(left);
+            rightMotor.setPower(right);
 
             // Use gamepad left & right Bumpers to open and close the claw
             /*if (gamepad1.right_bumper)

@@ -56,10 +56,10 @@ public class BasicOpMode_Iterative extends OpMode
 {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftFront = null;
-    private DcMotor rightFront = null;
-    private DcMotor rightRear = null;
-    private DcMotor leftRear = null;
+    //private DcMotor leftFront = null;
+    //private DcMotor rightFront = null;
+    private DcMotor rightMotor = null;
+    private DcMotor leftMotor = null;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -71,17 +71,17 @@ public class BasicOpMode_Iterative extends OpMode
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftRear  = hardwareMap.get(DcMotor.class, "left_rear");
-        leftFront = hardwareMap.get(DcMotor.class, "left_front");
-        rightFront = hardwareMap.get(DcMotor.class, "right_front");
-        rightRear = hardwareMap.get(DcMotor.class, "right_rear");
+        leftMotor  = hardwareMap.get(DcMotor.class, "leftMotor");
+        //leftFront = hardwareMap.get(DcMotor.class, "left_front");
+        //rightFront = hardwareMap.get(DcMotor.class, "right_front");
+        rightMotor = hardwareMap.get(DcMotor.class, "rightMotor");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftRear.setDirection(DcMotor.Direction.FORWARD);
-        leftFront.setDirection(DcMotor.Direction.FORWARD);
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
-        rightRear.setDirection(DcMotor.Direction.REVERSE);
+        leftMotor.setDirection(DcMotor.Direction.FORWARD);
+        //leftFront.setDirection(DcMotor.Direction.FORWARD);
+        //rightFront.setDirection(DcMotor.Direction.REVERSE);
+        rightMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -127,19 +127,19 @@ public class BasicOpMode_Iterative extends OpMode
         //rearLeftPower    = Range.clip(drive + turn, 1.0, -1.0) ;
         //frontRightPower  = Range.clip(drive - turn, -1.0, 1.0) ;
         //rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
-        frontLeftPower = drive - turn;
+        //frontLeftPower = drive - turn;
         rearLeftPower = drive - turn;
-        frontRightPower = drive + turn;
+        //frontRightPower = drive + turn;
         rearRightPower = drive + turn;
 
-        frontLeftPower += -gamepad1.right_trigger;
+        //frontLeftPower += -gamepad1.right_trigger;
         rearLeftPower += gamepad1.right_trigger;
         rearRightPower += -gamepad1.right_trigger;
-        frontRightPower += gamepad1.right_trigger;
+        //frontRightPower += gamepad1.right_trigger;
 
-        frontLeftPower += gamepad1.left_trigger;
+        //frontLeftPower += gamepad1.left_trigger;
         rearLeftPower += -gamepad1.left_trigger;
-        frontRightPower += -gamepad1.left_trigger;
+        //frontRightPower += -gamepad1.left_trigger;
         rearRightPower += gamepad1.left_trigger;
 
         // Tank Mode uses one stick to control each wheel.
@@ -168,10 +168,10 @@ public class BasicOpMode_Iterative extends OpMode
 
 
         // Send calculated power to wheels
-        rightRear.setPower(rearRightPower);
-        leftRear.setPower(rearLeftPower);
-        leftFront.setPower(frontLeftPower);
-        rightFront.setPower(frontRightPower);
+        rightMotor.setPower(rearRightPower);
+        leftMotor.setPower(rearLeftPower);
+        //leftFront.setPower(frontLeftPower);
+        //rightFront.setPower(frontRightPower);
         /*rightRear.setPower(rightPower);
         leftRear.setPower(leftPower);
         leftFront.setPower(leftPower);
@@ -185,8 +185,5 @@ public class BasicOpMode_Iterative extends OpMode
     /*
      * Code to run ONCE after the driver hits STOP
      */
-    @Override
-    public void stop() {
-    }
 
 }
