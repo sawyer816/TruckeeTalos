@@ -108,10 +108,10 @@ public class BasicOpMode_Iterative extends OpMode
     @Override
     public void loop() {
         // Setup a variable for each drive wheel to save power level for telemetry
-        double frontLeftPower;
-        double rearLeftPower;
-        double frontRightPower;
-        double rearRightPower;
+        //double frontLeftPower;
+        double rightMotorC;
+        //double frontRightPower;
+        double leftMotorC;
 
         //double rightPower;
         //double leftPower;
@@ -121,55 +121,55 @@ public class BasicOpMode_Iterative extends OpMode
 
         // POV Mode uses left stick to go forward, and right stick to turn.
         // - This uses basic math to combine motions and is easier to drive straight.
-        double drive = gamepad1.left_stick_y;
-        double turn  = gamepad1.right_stick_x;
+        //double drive = gamepad1.left_stick_y;
+        //double turn  = gamepad1.right_stick_x;
         //leftPower    = Range.clip(drive + turn, 1.0, -1.0) ;
-        //rearLeftPower    = Range.clip(drive + turn, 1.0, -1.0) ;
+        //rightMotor    = Range.clip(drive + turn, 1.0, -1.0) ;
         //frontRightPower  = Range.clip(drive - turn, -1.0, 1.0) ;
         //rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
         //frontLeftPower = drive - turn;
-        rearLeftPower = drive - turn;
+        //leftMotorC = drive - turn;
         //frontRightPower = drive + turn;
-        rearRightPower = drive + turn;
+        //rightMotorC = drive + turn;
 
         //frontLeftPower += -gamepad1.right_trigger;
-        rearLeftPower += gamepad1.right_trigger;
-        rearRightPower += -gamepad1.right_trigger;
+        //rightMotorC += gamepad1.right_trigger;
+       // leftMotorC += -gamepad1.right_trigger;
         //frontRightPower += gamepad1.right_trigger;
 
         //frontLeftPower += gamepad1.left_trigger;
-        rearLeftPower += -gamepad1.left_trigger;
+        //leftMotorC += -gamepad1.left_trigger;
         //frontRightPower += -gamepad1.left_trigger;
-        rearRightPower += gamepad1.left_trigger;
+        //rightMotorC += gamepad1.left_trigger;
 
         // Tank Mode uses one stick to control each wheel.
         // - This requires no math, but it is hard to drive forward slowly and keep straight.
 
 
-        /*frontLeftPower  = gamepad1.left_stick_y ;
-        rearLeftPower  = gamepad1.left_stick_y ;
-        frontRightPower = gamepad1.right_stick_y ;
-        rearRightPower = gamepad1.right_stick_y ;
+        //frontLeftPower  = gamepad1.left_stick_y ;
+        leftMotorC  = gamepad1.left_stick_y ;
+        //frontRightPower = gamepad1.right_stick_y ;
+        rightMotorC = gamepad1.right_stick_y ;
 
-        frontLeftPower += gamepad1.right_trigger;
-        rearLeftPower += -gamepad1.right_trigger;
-        rearRightPower += gamepad1.right_trigger;
-        frontRightPower += -gamepad1.right_trigger;
+        //frontLeftPower += gamepad1.right_trigger;
+        leftMotorC += -gamepad1.right_trigger;
+        rightMotorC += gamepad1.right_trigger;
+        //frontRightPower += -gamepad1.right_trigger;
 
-        frontLeftPower += -gamepad1.left_trigger;
-        rearLeftPower += gamepad1.left_trigger;
-        frontRightPower += gamepad1.left_trigger;
-        rearRightPower += -gamepad1.left_trigger;*/
+        //frontLeftPower += -gamepad1.left_trigger;
+        leftMotorC += gamepad1.left_trigger;
+        //frontRightPower += gamepad1.left_trigger;
+        rightMotorC += -gamepad1.left_trigger;
 
-        /*frontLeftPower = gamepad1.left_stick_y;
-        rearLeftPower = gamepad1.left_stick_x;
-        frontRightPower = gamepad1.right_stick_y;
-        rearRightPower = gamepad1.right_stick_x;*/
+        //frontLeftPower = gamepad1.left_stick_y;
+        leftMotorC = gamepad1.left_stick_x;
+        //frontRightPower = gamepad1.right_stick_y;
+        rightMotorC = gamepad1.right_stick_x;
 
 
         // Send calculated power to wheels
-        rightMotor.setPower(rearRightPower);
-        leftMotor.setPower(rearLeftPower);
+        rightMotor.setPower(rightMotorC);
+        leftMotor.setPower(leftMotorC);
         //leftFront.setPower(frontLeftPower);
         //rightFront.setPower(frontRightPower);
         /*rightRear.setPower(rightPower);
@@ -179,7 +179,7 @@ public class BasicOpMode_Iterative extends OpMode
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        //telemetry.addData("Motors", "left (%.2f), right (%.2f)", frontLeftPower, rearLeftPower, frontRightPower, rearRightPower);
+        telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftMotorC, rightMotorC);
     }
 
     /*

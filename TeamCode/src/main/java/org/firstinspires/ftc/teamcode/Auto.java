@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             waitForStart();
 
             DriveForward(5);
-            Thread.sleep(1500);
+            Thread.sleep(2000);
             //TurnLeft(1);
             //Thread.sleep(500);
             //DriveForward(1);
